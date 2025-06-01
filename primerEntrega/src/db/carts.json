@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "productscarrito": [
+      {
+        "product": 2,
+        "quantity": 3
+      }
+    ]
+  }
+
+]

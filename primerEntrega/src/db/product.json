@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "title": "gorra",
+    "description": "gorra viejas",
+    "category": "Indumentaria",
+    "price": "",
+    "thumbnail": "",
+    "status": "true",
+    "code": "RRA",
+    "stock": 300
+  },
+  {
+    "id": 2,
+    "title": "pantalon",
+    "description": "Pantalon",
+    "category": "Indumentaria",
+    "price": "",
+    "thumbnail": "",
+    "status": "true",
+    "code": "RRA",
+    "stock": 200
+  }
+]
