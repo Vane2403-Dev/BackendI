@@ -5,7 +5,7 @@ import { engine }  from 'express-handlebars';
 import { setupSocket } from './util/socket.js';
 import { createServer } from 'http';
 import { connectMongoDB } from "./config/db.js";
-import envsConfig from "./config/envs.config.js";
+import envsConfig from "./config/env.config.js";
 
 const app =express();
 
