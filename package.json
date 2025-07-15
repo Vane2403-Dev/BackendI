@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --watch ./segundaEntrega/src/app"
+    "dev": "node --watch ./proyectoFinal/src/app"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,8 @@
     "express": "^5.1.0",
     "express-handlebars": "^8.0.1",
     "handlebars": "^4.7.8",
+    "mongoose": "^8.16.3",
+    "mongoose-paginate-v2": "^1.9.1",
     "socket.io": "^4.8.1"
   }
 }

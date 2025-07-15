@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "title": "gorra",
+    "description": "gorra viejas",
+    "category": "Accesorio",
+    "price": "2000.00",
+    "thumbnail": "",
+    "status": "true",
+    "code": "RRA",
+    "stock": 300
+  },
+  {
+    "id": 2,
+    "title": "pantalon",
+    "description": "Pantalon",
+    "category": "Indumentaria",
+    "price": "30000.00",
+    "thumbnail": "",
+    "status": "true",
+    "code": "RRA",
+    "stock": 200
+  },
+  {
+    "id": 3,
+    "title": "remera",
+    "description": "Remera Reff",
+    "category": "Indumentaria",
+    "price": 20000,
+    "stock": 20,
+    "code": "RRR",
+    "status": false,
+    "thumbnail": null
+  }
+]
