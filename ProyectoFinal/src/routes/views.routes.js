@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { productDao } from "../persistence/dao/product.dao.js";
+import { productDao } from "../persistencia/dao/product.dao.js";
 
 const router = Router();
 

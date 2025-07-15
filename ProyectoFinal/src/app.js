@@ -5,6 +5,7 @@ import { engine }  from 'express-handlebars';
 import { setupSocket } from './util/socket.js';
 import { createServer } from 'http';
 import { connectMongoDB } from "./config/db.js";
+import envsConfig from "./config/envs.config.js";
 
 const app =express();
 
@@ -34,9 +35,8 @@ const server = createServer(app);
 setupSocket(server);
 
 
-const PORT = 8080;
-server.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+app.listen(envsConfig.PORT, () => {
+  console.log(`Servidor escuchando en el puerto ${envsConfig.PORT}`);
 });
 
 
