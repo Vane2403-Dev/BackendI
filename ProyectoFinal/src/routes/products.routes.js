@@ -4,7 +4,7 @@ import { productDao } from "../persistencia/dao/product.dao.js";
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+/*router.get("/", async (req, res) => {
  try {
   const product = await productDao.getAll();
    if (!product) return res.status(404).json({ status: "Error", msg: "Producto no encontrado" });
@@ -13,24 +13,33 @@ router.get("/", async (req, res) => {
   
     res.status(500).json({ status: "Erro", msg: "Error interno del servidor" });
  }
- });
+ });*/
 
- router.get('/paginados', async (req, res) => {
-    try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 4;
+router.get("/", async (req, res) => {
+  try {
+    const { limit, page, sort, category, status } = req.query;
 
-        console.log('Params:', req.query);
-        console.log('Paginación:', page, limit);
+    // Construimos el query (filtro)
+    let query = null;
+    if (category) query = category;
+    if (status) query = status; //Esto sobreescribirá "category" si vienen ambos
 
-        const result = await productDao.getAllPage(page, limit);
+    const options = {
+      limit: parseInt(limit) || 10,
+      page: parseInt(page) || 1,
+      sort: sort || null,
+      query: query || null
+    };
 
-        res.status(200).json({ status: "ok", result });
-    } catch (error) {
-        console.error('Error al cargar productos paginados:', error);
-        res.status(500).send('Error al cargar productos paginados.');
-    }
+    const products = await productDao.getAllPage(options);
+    res.status(200).json({ status: "ok", products });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: "error", msg: "Error interno del servidor" });
+  }
 });
+
+
 
 router.get("/:pid", async (req, res) => {
   try {

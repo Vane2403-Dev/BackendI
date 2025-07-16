@@ -39,11 +39,23 @@ async getAll() {
 }
 
     // Consultar todos los productos paginados
-  async getAllPage(page = 1, limit = 4) {
-  const result = await productModel.paginate({}, { page, limit, lean: true });
+
+
+// Consultar todos los productos paginados con filtros
+async getAllPage({ page = 1, limit = 10, query = null, sort = null }) {
+  const filter = query ? { category: query } : {};
+  const sortOption = sort === 'asc' ? { price: 1 } : sort === 'desc' ? { price: -1 } : {};
+
+  const result = await productModel.paginate(filter, {
+    page,
+    limit,
+    sort: sortOption,
+    lean: true
+  });
+
   result.docs.forEach(p => p._id = p._id.toString());
-  return result;
-}
+  return result
+};
    
     
 
