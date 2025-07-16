@@ -35,7 +35,7 @@ const server = createServer(app);
 setupSocket(server);
 
 
-app.listen(envsConfig.PORT, () => {
+server.listen(envsConfig.PORT, () => {
   console.log(`Servidor escuchando en el puerto ${envsConfig.PORT}`);
 });
 

@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
 
     res.status(201).json({ status: "ok", cart });
   } catch (error) {
-    console.log(error);
+   
     res.status(500).json({ status: "Erro", msg: "Error interno del servidor" });
   }
 });
@@ -24,7 +24,7 @@ router.get("/:cid", async (req, res) => {
 
     res.status(200).json({ status: "ok", cart });
   } catch (error) {
-    console.log(error);
+  
     res.status(500).json({ status: "Erro", msg: "Error interno del servidor" });
   }
 });
@@ -41,7 +41,7 @@ router.post("/:cid/product/:pid", async (req, res) => {
 
     res.status(200).json({ status: "ok", payload: cartUpdate });
   } catch (error) {
-    console.log(error);
+ 
     res.status(500).json({ status: "Erro", msg: "Error interno del servidor" });
   }
 });
@@ -58,7 +58,7 @@ router.delete("/:cid/product/:pid", async (req, res) => {
 
     res.status(200).json({ status: "ok", payload: cartUpdate });
   } catch (error) {
-    console.log(error);
+
     res.status(500).json({ status: "Erro", msg: "Error interno del servidor" });
   }
 });
@@ -77,7 +77,7 @@ router.put("/:cid/product/:pid", async (req, res) => {
 
     res.status(200).json({ status: "ok", payload: cartUpdate });
   } catch (error) {
-    console.log(error);
+
     res.status(500).json({ status: "Erro", msg: "Error interno del servidor" });
   }
 });
@@ -90,8 +90,7 @@ router.delete("/:cid", async (req, res) => {
 
     res.status(200).json({ status: "ok", cart });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ status: "Erro", msg: "Error interno del servidor" });
+    console.log(error);    res.status(500).json({ status: "Erro", msg: "Error interno del servidor" });
   }
 });
 

@@ -1,4 +1,8 @@
-const socket = io();
+const socket = io();   
+
+
+
+
 
 // Escuchar la actualización de productos y renderizar en la página
 socket.on('productosActualizados', (productos) => {
@@ -14,8 +18,7 @@ socket.on('productosActualizados', (productos) => {
             <p><strong>Categoría:</strong> ${producto.category}</p>
             <p><strong>Precio:</strong> $${producto.price}</p>
             <p><strong>Stock:</strong> ${producto.stock}</p>
-            ${producto.thumbnail ? `<img src="${producto.thumbnail}" alt="${producto.title}">` : '<p>Sin imagen disponible</p>'}
-            <button class="delete-button" data-id="${producto.id}">Eliminar</button>
+            <button class="delete-button" data-id="${producto._id}">Eliminar</button>
         `;
         container.appendChild(div);
     });
@@ -31,16 +34,14 @@ document.getElementById('product-form').addEventListener('submit', (e) => {
         category: document.getElementById('category').value,
         price: parseFloat(document.getElementById('price').value),
         stock: parseInt(document.getElementById('stock').value),
-        code: document.getElementById('code').value ,
-        status: document.getElementById('status').value === 'true' ,
-        thumbnail: document.getElementById('thumbnail')?.value || null,
+        thumbnail: document.getElementById('thumbnail')?.value || null
     };
     
 
     socket.emit('nuevoProducto', newProduct);
+    console.log('📦 Enviando producto al servidor:', newProduct);
     e.target.reset();
 });
-
 // Escuchar evento de clic en los botones "Eliminar"
 document.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-button')) {

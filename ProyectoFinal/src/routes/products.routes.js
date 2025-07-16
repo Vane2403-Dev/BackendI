@@ -5,35 +5,31 @@ import { productDao } from "../persistencia/dao/product.dao.js";
 const router = Router();
 
 router.get("/", async (req, res) => {
-  try {
-    const { limit, page, sort, category, status } = req.query;
-
-    const options = {
-      limit: limit || 10,
-      page: page || 1,
-      sort: {
-        price: sort === "asc" ? 1 : -1,
-      },
-      learn: true,
-    };
-
-    // Si nos solicitan por categoría
-    if (category) {
-      const products = await productDao.getAll({ category }, options);
-      return res.status(200).json({ status: "ok", products });
-    }
-
-    if (status) {
-      const products = await productDao.getAll({ status }, options);
-      return res.status(200).json({ status: "ok", products });
-    }
-
-    const products = await productDao.getAll({}, options);
-    res.status(200).json({ status: "ok", products });
-  } catch (error) {
-    console.log(error);
+ try {
+  const product = await productDao.getAll();
+   if (!product) return res.status(404).json({ status: "Error", msg: "Producto no encontrado" });
+    res.status(200).json({ status: "ok", product });
+ } catch (error) {
+  
     res.status(500).json({ status: "Erro", msg: "Error interno del servidor" });
-  }
+ }
+ });
+
+ router.get('/paginados', async (req, res) => {
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 4;
+
+        console.log('Params:', req.query);
+        console.log('Paginación:', page, limit);
+
+        const result = await productDao.getAllPage(page, limit);
+
+        res.status(200).json({ status: "ok", result });
+    } catch (error) {
+        console.error('Error al cargar productos paginados:', error);
+        res.status(500).send('Error al cargar productos paginados.');
+    }
 });
 
 router.get("/:pid", async (req, res) => {
@@ -44,21 +40,21 @@ router.get("/:pid", async (req, res) => {
 
     res.status(200).json({ status: "ok", product });
   } catch (error) {
-    console.log(error);
+
     res.status(500).json({ status: "Erro", msg: "Error interno del servidor" });
   }
 });
-
 router.delete("/:pid", async (req, res) => {
   try {
     const { pid } = req.params;
-    const product = await productDao.deleteOne(pid);
+    console.log("ID recibido para eliminar:", pid);
+    const product = await productDao.delete(pid); 
     if (!product) return res.status(404).json({ status: "Error", msg: "Producto no encontrado" });
 
     res.status(200).json({ status: "ok", msg: `El producto con el id ${pid} fue eliminado` });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ status: "Erro", msg: "Error interno del servidor" });
+    console.log("ERROR:", error.message);
+    res.status(500).json({ status: "Error", msg: error.message });
   }
 });
 
@@ -71,7 +67,7 @@ router.put("/:pid", async (req, res) => {
 
     res.status(200).json({ status: "ok", product });
   } catch (error) {
-    console.log(error);
+
     res.status(500).json({ status: "Erro", msg: "Error interno del servidor" });
   }
 });
@@ -83,7 +79,7 @@ router.post("/",  async (req, res) => {
 
     res.status(201).json({ status: "ok", product });
   } catch (error) {
-    console.log(error);
+
     res.status(500).json({ status: "Erro", msg: "Error interno del servidor" });
   }
 });
